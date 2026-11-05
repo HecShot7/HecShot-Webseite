@@ -1,4 +1,9 @@
-import * as THREE from '../vendor/three.module.min.js';
+import * as THREE from 'three';
+import { EffectComposer } from '../vendor/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from '../vendor/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from '../vendor/jsm/postprocessing/UnrealBloomPass.js';
+import { ShaderPass } from '../vendor/jsm/postprocessing/ShaderPass.js';
+import { CopyShader } from '../vendor/jsm/shaders/CopyShader.js';
 
 /* --------------------------------------------------------------------------
    Procedural point-cloud shapes. Every shape returns exactly N points so the
@@ -355,7 +360,7 @@ const fragmentShader = /* glsl */`
 
 export function createScene(canvas, { mobile }) {
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true, powerPreference: 'high-performance' });
-  renderer.setClearColor(0x000000, 0);
+  renderer.setClearColor(0x07070a, 1);
   const pixel = Math.min(window.devicePixelRatio || 1, mobile ? 1.75 : 2);
   renderer.setPixelRatio(pixel);
 
@@ -426,6 +431,14 @@ export function createScene(canvas, { mobile }) {
   }));
   scene.add(dust);
 
+  // Post-processing: soft cinematic bloom
+  const composer = new EffectComposer(renderer);
+  composer.addPass(new RenderPass(scene, camera));
+  const bloom = new UnrealBloomPass(new THREE.Vector2(256, 256), mobile ? 0.75 : 0.9, 0.55, 0.08);
+  composer.addPass(bloom);
+  composer.addPass(new ShaderPass(CopyShader)); // raw copy: keeps deep blacks
+  let useBloom = true;
+
   let pair = [0, 1];
   function setPair(a, b) {
     if (pair[0] === a && pair[1] === b) return;
@@ -439,19 +452,26 @@ export function createScene(canvas, { mobile }) {
   const mouseNdc = new THREE.Vector2(9, 9);
   const tmpV = new THREE.Vector2();
 
+  let baseZ = 6.4;
   function resize() {
     const w = window.innerWidth, h = window.innerHeight;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     // keep the object framed on narrow portrait screens
-    camera.position.z = w / h < 0.8 ? 6.4 / Math.max(w / h, 0.48) * 0.78 : 6.4;
+    baseZ = w / h < 0.8 ? 6.4 / Math.max(w / h, 0.48) * 0.78 : 6.4;
+    camera.position.z = baseZ;
     camera.updateProjectionMatrix();
+    composer.setPixelRatio(pixel);
+    composer.setSize(w, h);
+    bloom.resolution.set(w * (mobile ? 0.5 : 0.75), h * (mobile ? 0.5 : 0.75));
   }
   resize();
   window.addEventListener('resize', resize);
 
   const clock = new THREE.Clock();
   let running = true;
+  const perf = { frames: 0, time: 0 };
+  const forceHQ = /[?&]hq\b/.test(location.search);
 
   function frame() {
     if (!running) return;
@@ -506,7 +526,23 @@ export function createScene(canvas, { mobile }) {
     dust.rotation.y = t * 0.01 + smooth.mx * 0.05;
     dust.position.y = state.scroll * 0.0006;
 
-    renderer.render(scene, camera);
+    // camera dolly-in + slight roll during each morph
+    const push = Math.sin(m * Math.PI);
+    camera.position.z += (baseZ * (1 - 0.1 * push) - camera.position.z) * 0.1;
+    camera.rotation.z += ((a % 2 ? -1 : 1) * 0.05 * push - camera.rotation.z) * 0.08;
+    camera.position.x += (smooth.mx * 0.15 - camera.position.x) * 0.05;
+    camera.position.y += (-smooth.my * 0.1 - camera.position.y) * 0.05;
+
+    if (useBloom) composer.render(); else renderer.render(scene, camera);
+
+    // adaptive quality: drop bloom on slow devices
+    if (!forceHQ && perf.frames < 150 && uniforms.uOpacity.value > 0.5) {
+      perf.frames++; perf.time += dt;
+      if (perf.frames === 150 && perf.time / 150 > 1 / 38) {
+        useBloom = false;
+        renderer.setClearColor(0x000000, 0);
+      }
+    }
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);

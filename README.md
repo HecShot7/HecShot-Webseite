@@ -17,5 +17,8 @@ python3 -m http.server 8080
 - **3D shapes:** `js/scene.js` (one function per service; colors in `PALETTE`).
 - **Position of the 3D object per section:** the `data-x`, `data-y` and `data-scale` attributes on the `<section>`s.
 
+## 3D quality
+The glow (bloom) switches off automatically on slow devices. To force it on for testing, use `?hq` in the URL.
+
 ## Hosting
 Any static hosting works: GitHub Pages, Netlify, Vercel, Cloudflare Pages, or classic webspace (FTP upload).

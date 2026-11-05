@@ -246,6 +246,7 @@ main, .footer { position: relative; z-index: 2; }
 /* Contact */
 .contact { align-items: center; text-align: center; min-height: 110vh; }
 .contact__title { margin: 0 0 48px; font-size: clamp(48px, 10vw, 170px); line-height: .9; letter-spacing: -0.055em; font-weight: 600; }
+.contact__title { text-shadow: 0 4px 40px rgba(7,7,10,.85); }
 .contact__title em { color: var(--accent); }
 .contact__mail {
   display: inline-flex; align-items: center; gap: 16px;
