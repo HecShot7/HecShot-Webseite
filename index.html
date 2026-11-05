@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HecShot Visuals – Foto, Film, Drohne, 360° & Webdesign</title>
+  <meta name="description" content="HecShot Visuals: Fotografie, Film, Postproduktion, Drohnenaufnahmen, 360°-Panoramen und Webdesign – visuelle Geschichten aus einer Hand." />
+  <meta name="theme-color" content="#07070a" />
+  <meta property="og:title" content="HecShot Visuals" />
+  <meta property="og:description" content="Foto · Film · Edit · Drohne · 360° · Web" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2307070a'/%3E%3Ccircle cx='32' cy='32' r='17' fill='none' stroke='%23ff6a3d' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='6' fill='%23ff6a3d'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="is-loading">
+
+  <!-- Loader -->
+  <div class="loader" aria-hidden="true">
+    <div class="loader__inner">
+      <div class="loader__mark"><span>HEC</span><span>SHOT</span></div>
+      <div class="loader__bar"><i></i></div>
+      <div class="loader__count mono"><span class="js-count">000</span></div>
+    </div>
+  </div>
+
+  <canvas class="webgl" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+
+  <!-- HUD -->
+  <header class="nav">
+    <a href="#top" class="nav__logo" data-cursor="Home">
+      <span class="nav__dot"></span>HecShot<em>Visuals</em>
+    </a>
+    <nav class="nav__links" aria-label="Hauptnavigation">
+      <a href="#leistungen" data-cursor="Ansehen">Leistungen</a>
+      <a href="#prozess" data-cursor="Ansehen">Prozess</a>
+      <a href="#kontakt" data-cursor="Los">Kontakt</a>
+    </nav>
+    <a href="#kontakt" class="btn btn--small" data-cursor="Hallo">Projekt anfragen</a>
+    <button class="nav__burger" aria-label="Menü öffnen" aria-expanded="false"><span></span><span></span></button>
+  </header>
+
+  <div class="menu" aria-hidden="true">
+    <a href="#leistungen">Leistungen</a>
+    <a href="#prozess">Prozess</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+
+  <aside class="hud" aria-hidden="true">
+    <div class="hud__index mono"><span class="js-hud-num">00</span> / 06</div>
+    <div class="hud__label mono js-hud-label">Intro</div>
+    <div class="hud__track"><i class="js-hud-progress"></i></div>
+  </aside>
+
+  <div class="rec mono" aria-hidden="true"><i></i>REC <span class="js-timecode">00:00:00:00</span></div>
+
+  <main id="top">
+
+    <!-- HERO -->
+    <section class="section hero" data-shape="0" data-x="0.9" data-y="0.25" data-scale="1" data-label="Intro">
+      <div class="hero__eyebrow mono reveal-fade">Foto&nbsp;· Film&nbsp;· Edit&nbsp;· Drohne&nbsp;· 360°&nbsp;· Web</div>
+      <h1 class="hero__title">
+        <span class="line"><span class="split">Visuals,</span></span>
+        <span class="line"><span class="split">die <em>bleiben.</em></span></span>
+      </h1>
+      <div class="hero__bottom">
+        <p class="hero__lead reveal-fade">Ich mache Marken, Orte und Momente sichtbar: als Bild, als Film, aus der Luft, in 360° und im Web. Alles aus einer Hand.</p>
+        <div class="hero__scroll mono reveal-fade"><span class="hero__scroll-line"></span>Scrollen</div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Fotografie</span><i>✦</i><span>Film</span><i>✦</i><span>Postproduktion</span><i>✦</i><span>Drohne</span><i>✦</i><span>360° Panorama</span><i>✦</i><span>Webdesign</span><i>✦</i>
+        <span>Fotografie</span><i>✦</i><span>Film</span><i>✦</i><span>Postproduktion</span><i>✦</i><span>Drohne</span><i>✦</i><span>360° Panorama</span><i>✦</i><span>Webdesign</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- STATEMENT -->
+    <section class="section statement" data-shape="0" data-x="0" data-y="0" data-scale="1.35" data-label="Haltung">
+      <p class="statement__text js-words">Gute Bilder sind kein Zufall. Sie entstehen aus Licht, Timing und einem klaren Blick dafür, was eine Geschichte wirklich erzählen soll. Von der ersten Idee bis zum fertigen Auftritt.</p>
+    </section>
+
+    <div id="leistungen"></div>
+
+    <!-- 01 FOTO -->
+    <section class="section service" data-shape="1" data-x="1.55" data-y="0" data-scale="1" data-label="Fotografie" data-num="01">
+      <div class="service__panel">
+        <div class="service__num mono">01 <span>/ Fotografie</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Fotografie,</span></span><span class="line"><span class="split">die <em>wirkt.</em></span></span></h2>
+        <p class="service__text reveal-fade">Portraits, Business, Produkte, Events und Architektur. Ich arbeite mit natürlichem und gesetztem Licht und denke jede Aufnahme so, dass sie auf deiner Website, in Social Media und im Druck funktioniert.</p>
+        <ul class="tags reveal-fade"><li>Portrait</li><li>Business</li><li>Produkt</li><li>Event</li><li>Architektur</li></ul>
+      </div>
+    </section>
+
+    <!-- 02 FILM -->
+    <section class="section service service--right" data-shape="2" data-x="-1.55" data-y="0" data-scale="1" data-label="Film" data-num="02">
+      <div class="service__panel">
+        <div class="service__num mono">02 <span>/ Film</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Bewegtbild</span></span><span class="line"><span class="split">mit <em>Gefühl.</em></span></span></h2>
+        <p class="service__text reveal-fade">Imagefilme, Recruiting-Videos, Hochzeiten, Reels und Musikvideos. Mit kinematischer Bildsprache, sauberem Ton und einem Schnitt, der Rhythmus hat.</p>
+        <ul class="tags reveal-fade"><li>Imagefilm</li><li>Social Reels</li><li>Event</li><li>Hochzeit</li><li>4K</li></ul>
+      </div>
+    </section>
+
+    <!-- 03 EDIT -->
+    <section class="section service" data-shape="3" data-x="1.45" data-y="0" data-scale="0.82" data-label="Postproduktion" data-num="03">
+      <div class="service__panel">
+        <div class="service__num mono">03 <span>/ Postproduktion</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Der Feinschliff</span></span><span class="line"><span class="split">im <em>Schnitt.</em></span></span></h2>
+        <p class="service__text reveal-fade">Schnitt, Color Grading, Sounddesign, Retusche und Motion Graphics. Auf Wunsch bearbeite ich auch dein bestehendes Material, damit es aussieht wie aus einem Guss.</p>
+        <ul class="tags reveal-fade"><li>Schnitt</li><li>Color Grading</li><li>Retusche</li><li>Sound</li><li>Motion</li></ul>
+      </div>
+    </section>
+
+    <!-- 04 DROHNE -->
+    <section class="section service service--right" data-shape="4" data-x="-1.4" data-y="0.15" data-scale="0.88" data-label="Drohne" data-num="04">
+      <div class="service__panel">
+        <div class="service__num mono">04 <span>/ Drohnenaufnahmen</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Perspektiven</span></span><span class="line"><span class="split">von <em>oben.</em></span></span></h2>
+        <p class="service__text reveal-fade">Luftaufnahmen für Immobilien, Baustellen, Events, Tourismus und Imagefilme. Gestochen scharf in Foto und Video, mit flüssigen Kamerafahrten und der nötigen Planung im Vorfeld.</p>
+        <ul class="tags reveal-fade"><li>Immobilien</li><li>Baufortschritt</li><li>Landschaft</li><li>Event</li><li>FPV</li></ul>
+      </div>
+    </section>
+
+    <!-- 05 360 -->
+    <section class="section service" data-shape="5" data-x="1.55" data-y="0" data-scale="1" data-label="360° Panorama" data-num="05">
+      <div class="service__panel">
+        <div class="service__num mono">05 <span>/ 360° Panorama</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Räume, die man</span></span><span class="line"><span class="split"><em>betreten</em> kann.</span></span></h2>
+        <p class="service__text reveal-fade">Interaktive 360°-Bilder und virtuelle Rundgänge für Immobilien, Hotels, Gastronomie und Showrooms. Deine Kunden schauen sich um, bevor sie überhaupt da sind.</p>
+        <ul class="tags reveal-fade"><li>Virtuelle Touren</li><li>Immobilien</li><li>Hotel &amp; Gastro</li><li>Google Street View</li></ul>
+      </div>
+    </section>
+
+    <!-- 06 WEB -->
+    <section class="section service service--right" data-shape="6" data-x="-1.45" data-y="0" data-scale="0.95" data-label="Webdesign" data-num="06">
+      <div class="service__panel">
+        <div class="service__num mono">06 <span>/ Webdesign</span></div>
+        <h2 class="service__title"><span class="line"><span class="split">Websites,</span></span><span class="line"><span class="split">die <em>verkaufen.</em></span></span></h2>
+        <p class="service__text reveal-fade">Schnelle, responsive Websites mit eigenem Look, statt Baukasten von der Stange. Und weil ich die Inhalte selbst produziere, passen Bild, Film und Design perfekt zusammen.</p>
+        <ul class="tags reveal-fade"><li>Design</li><li>Entwicklung</li><li>Responsive</li><li>SEO-Basics</li><li>Hosting</li></ul>
+      </div>
+    </section>
+
+    <!-- PROZESS -->
+    <section class="section process" id="prozess" data-shape="7" data-x="1.6" data-y="0.85" data-scale="0.55" data-label="Prozess">
+      <div class="process__head">
+        <div class="mono eyebrow">So arbeiten wir zusammen</div>
+        <h2 class="process__title"><span class="line"><span class="split">Von der Idee</span></span><span class="line"><span class="split">zum <em>fertigen Bild.</em></span></span></h2>
+      </div>
+      <ol class="process__grid">
+        <li class="card reveal-card"><span class="mono">01</span><h3>Gespräch</h3><p>Wir klären, was du brauchst, wofür und für wen. Kostenlos und unverbindlich.</p></li>
+        <li class="card reveal-card"><span class="mono">02</span><h3>Konzept</h3><p>Ich plane Location, Licht, Ablauf und Shotlist, damit am Drehtag alles sitzt.</p></li>
+        <li class="card reveal-card"><span class="mono">03</span><h3>Produktion</h3><p>Shooting, Dreh oder Flug. Effizient, entspannt und mit professionellem Equipment.</p></li>
+        <li class="card reveal-card"><span class="mono">04</span><h3>Lieferung</h3><p>Bearbeitet, in allen Formaten, die du brauchst. Schnell und in Top-Qualität.</p></li>
+      </ol>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="section contact" id="kontakt" data-shape="7" data-x="0" data-y="0" data-scale="1.25" data-label="Kontakt">
+      <div class="mono eyebrow reveal-fade">Kontakt</div>
+      <h2 class="contact__title">
+        <span class="line"><span class="split">Lass uns etwas</span></span>
+        <span class="line"><span class="split"><em>Großes</em> schaffen.</span></span>
+      </h2>
+      <!-- TODO: eigene E-Mail-Adresse eintragen -->
+      <a class="contact__mail magnetic" href="mailto:hallo@hecshot.de" data-cursor="Schreiben">
+        <span>hallo@hecshot.de</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      </a>
+      <div class="contact__links reveal-fade">
+        <!-- TODO: eigene Social-Links eintragen -->
+        <a href="https://instagram.com/" target="_blank" rel="noopener" data-cursor="Folgen">Instagram</a>
+        <a href="https://youtube.com/" target="_blank" rel="noopener" data-cursor="Ansehen">YouTube</a>
+        <a href="https://wa.me/" target="_blank" rel="noopener" data-cursor="Chatten">WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span class="js-year">2026</span> HecShot Visuals</span>
+    <span class="footer__links"><a href="#">Impressum</a><a href="#">Datenschutz</a></span>
+    <a href="#top" class="footer__top" data-cursor="Hoch">Nach oben ↑</a>
+  </footer>
+
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script src="vendor/lenis.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
